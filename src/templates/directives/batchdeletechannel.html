@@ -1,0 +1,18 @@
+<div class="background" ng-if="control.show">
+	<div class="jump_show_parent" style="width: 600px;" ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:600px;">批量删除渠道</div>
+			<div style="max-height: 500px;overflow: auto;width:600px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<div ng-repeat="item in control.data">
+						{{item.channelName}}
+					</div>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:600px;">
+				<div ng-if="channels.length!=0" class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

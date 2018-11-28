@@ -1,0 +1,88 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;"  ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:650px;">客服处理</div>
+			<div style="max-height: 950px;overflow: auto;width:650px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%" cellspacing="10">
+						<tr style="height:35px;">
+							<td style="width: 20%;padding-left: 60px;">订单号：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 90%;" disabled ng-model="customer_Service.orderId" />
+							</td>
+						</tr>
+						<tr style="height: 35px;">
+							<td style="width: 10%;padding-left:60px;">商户名称：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 90%;" disabled ng-model="customer_Service.agentName" />
+							</td>
+						</tr>
+						<tr style="height: 35px;">
+							<td style="width: 10%;padding-left:60px ;">充值号码：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 90%;" disabled ng-model="customer_Service.phoneNo"  />
+							</td>
+						</tr>
+						<tr style="height: 35px;">
+							<td style="width: 10%;padding-left:60px ;">商品名称：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 90%;" disabled ng-model="customer_Service.goodsName" />
+							</td>
+						</tr>
+						<tr style="height: 35px;">
+							<td style="width: 28%;padding-left:60px ;">付款金额（元）：</td>
+							<td style="width: 70%;">
+								<div ng-model="customer_Service.actualPrice">
+									<input style="display: block;width: 90%;" disabled value="{{customer_Service.actualPrice.toFixed(3)}}" />
+								</div>										
+							</td>
+						</tr>
+						<tr style="height: 35px;">
+							<td style="width: 10%;padding-left:60px ;">操作：</td>
+							<td style="width: 70% ;">
+								<select ng-model="$parent.operate" ng-required="true" style="display: block;width: 90%;" id="service_operation" ng-blur="_checkOperation()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option value="失败退款" ng-show="tk">失败退款</option>
+									<option value="冲正处理" ng-show="cz">冲正处理</option>
+								</select>
+								<div >
+									<a class="alert alert-danger" id="operation" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:35px;" ng-hide="reason()">
+							<td style="width: 10%;padding-left:60px ;">失败原因：</td>
+							<td style="width: 70% ;">
+								<select ng-model="$parent.operateReason" ng-required="true" style="display: block;width: 90%;" id="service_reason" ng-blur="_checkReason()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option value="客服核实失败">客服核实失败</option>
+									<option value="运营商核实失败">运营商核实失败</option>
+									<option value="超过48小时退款">超过48小时退款</option>
+									<option value="others">其他</option>
+								</select>
+								<div >
+									<a class="alert alert-danger" id="reason" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:35px;" ng-hide="reason()">
+							<td style="width: 10%;padding-left:60px ;">备注：</td>
+							<td style="width: 70% ;" style="display: block;width: 90%;">
+								<div style="display: block;padding-top:5px;">
+									<textarea ng-model="$parent.operateComment" style="width: 90%;"  ng-blur="check.operateComment()"></textarea>
+								</div>
+								<div ng-if="alert.operateComment">
+									<a class="alert alert-danger" style="float: left;">长度最多64个字符</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:650px;">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="commit() ">提交</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="close()">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

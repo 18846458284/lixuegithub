@@ -1,0 +1,13 @@
+<div class="dl_right fr">
+	<img src="images/adm.png" class="fl user-img">
+	<div class="dropdown fl" ng-cloak>
+		<button class="btn btn-default dropdown-toggle user-info" type="button" id="dropdownMenu1" data-toggle="dropdown">
+			{{currentUser.agentName}}&nbsp;&nbsp;&nbsp;{{currentUser.name}}
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><a ng-click="logout()">退出登录</a></li>
+			<li ><a ui-sref="app.account">重置密码</a></li>
+		</ul>
+	</div>
+</div>

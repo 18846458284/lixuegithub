@@ -1,0 +1,38 @@
+<div style="width:50%;margin: auto;margin-bottom: 20px;"><span class="fw_b f_16">登录</span></div>
+<div class="login-container">
+						<div class="col-xs-4">
+		                	<img class="login_logo" alt="logo" src="images/logo.png">
+		                </div>
+		                <div class="col-xs-1">
+		                    <img src="images/split.png">
+		                </div>
+		                <div class="col-xs-7">
+		                	<form role="form" id="loginForm" action="/firstLogin" method="post" name="myform">
+		                            <div class="form-group">
+		                                <label for="exampleInputEmail1">&nbsp;</label>
+		                            </div>
+		                            <div class="form-group">
+		                                <input type="text" id="loginUser" class="form-control" placeholder="邮箱" ng-model="loginEmail" ng-blur="_checkEmail($event);" ng-enter="doLogin()">
+		                                <a class="alert alert-danger" style="display: none;"></a>
+		                            </div>
+		                            <div class="form-group">
+		                                <input type="password" id="loginPwd" class="form-control" placeholder="密码" ng-model="loginPassword" ng-blur="_checkPasswd($event);" ng-enter="doLogin()">
+		                                <a class="alert alert-danger" style="display: none;"></a>
+		                            </div>
+		                            <div class="form-group" style="height:50px">
+		                             	<div class="col-xs-5" style="padding-left:0px">
+		                             		<input type="text" id="loginCode" class="form-control" ng-model="verifycode" maxlength="4" autocomplete="off" placeholder="验证码" ng-blur="_checkVerifycode($event);" ng-enter="doLogin()">
+		                             		<a class="alert alert-danger" style="display: none;"></a>
+		                             	</div>
+		                             	<div class="col-xs-7">
+		                             		<img src="{{verifyCode}}" alt="换一张" title="看不清,换一张" id="verifycodeImg" ng-click="changeone();">
+		                           			<span>&nbsp;&nbsp;</span><a href="javascript:void(0)" ng-click="changeone();">换一张</a>
+		                             	</div>
+		                            </div>
+									<div class="form-group">
+		                            	<a id="submitt" class="btn btn-primary login-button" href="javascript:void(0)" ng-click="doLogin()"> 登 录 </a>
+		                            	<a href="#forgetpwd" style="margin-top:20px;margin-right:10px;float: right;">忘记密码？</a>
+		                            </div>
+		                     </form>
+		               </div>
+					</div>

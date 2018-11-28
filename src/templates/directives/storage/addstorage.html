@@ -1,0 +1,121 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;" ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:600px;">新增货架</div>
+			<div style="max-height: 500px;overflow: auto;width:600px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="100%" cellspacing="10">
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">筛选条件：</td>
+							<td>
+								<div>
+									<select ng-model="$parent.filterpro" ng-change="filter_pro()">
+										<option value="">全部省份</option>
+										<option ng-repeat="item in SelectProvince">{{item.provinceName}}</option>
+									</select>
+									<select ng-model="$parent.filtermo" style="margin-left: 10px;" ng-change="filter_mo()">
+										<option value="">全部运营商</option>
+										<option value="CMCC">中国移动</option>
+										<option value="ChinaUnicom">中国联通</option>
+										<option value="ChinaNet">中国电信</option>
+									</select>
+									<input style="margin-left: 10px;font-size: 12px;vertical-align: top;width: 125px;" ng-blur="_checkgoodsspec()" ng-model="$parent.filterspec" placeholder="规格"/>
+									<div>
+										<a class="alert alert-danger" id="goods_spec" style="display: none;float: left;"></a>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">商品名称：</td>
+							<td style="width: 80%;">
+								<select style="width: 90%;" multiple="true" size="8" id="storage_goodsname" ng-model="$parent.goodsId" ng-blur="_checkgoodsName()">
+									<option value="" ng-selected="true" disabled style="display: none;">请选择商品</option>
+									<option ng-repeat="goods in goodsList " value="{{goods.id}}">{{goods.goodsName}}</option>
+								</select>
+								<div>
+									<a class="alert alert-danger" id="goods_name" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height: 30px;">
+							<td style="width: 25%;padding-left: 40px;">代理商：</td>
+							<td style="width: 80%;">
+								<select style="width: 90%; " multiple="true" size="8" ng-model="$parent.appId">
+									<option value="" selected="selected" disabled>请选择代理商（默认为全选）</option>
+									<option ng-repeat="agent in agents" value="{{agent.appId}}">{{agent.agentName}}</option>
+								</select>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">初始等待时长：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%; " type="text" id="storage_initWaitTime" placeholder="单位：分钟" ng-model="$parent.initWaitTime" ng-blur="_checkinitWaitTime()" />
+								<div>
+									<a class="alert alert-danger" id="initWaitTime_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">允许到账时长：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%; " type="text" id="storage_timeout" placeholder="单位：分钟" ng-model="$parent.timeoutMinute" ng-blur="_checktimeoutMinute()" />
+								<div>
+									<a class="alert alert-danger" id="timeout" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">商品折扣：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%; " type="text" id="storage_discount" placeholder="单位：万分比" ng-model="$parent.discount" ng-blur="_checkdiscount()" />
+								<div>
+									<a class="alert alert-danger" id="good_discount" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">优先原则：</td>
+							<td style="width: 80%;">
+								<select style="display: block;width: 90%; " ng-model="$parent.priorityStrategy">
+
+									<option value="shard" selected="selected" ng-selected="true">分流</option>
+									<option value="cost">成本</option>
+								</select>
+								<div>
+									<a class="alert alert-danger" id="priority_strategy" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">状态：</td>
+							<td style="width: 80%;">
+								<select style="width: 90%; " id="storage_state" ng-model="$parent.state" ng-blur="_checkstate()">
+									<option value="" selected disabled style="display: none;">请选择状态</option>
+									<option value="on">上架</option>
+									<option value="off">下架</option>
+								</select>
+								<div>
+									<a class="alert alert-danger" id="good_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 40px;">优先级：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%; " type="text" id="storage_priority" placeholder="优先级(-1表示不显示)" ng-model="$parent.priority" ng-blur="_checkpriority()" />
+								<div>
+									<a class="alert alert-danger" id="priority_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:600px;">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

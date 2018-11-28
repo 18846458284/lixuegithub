@@ -1,0 +1,41 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;" ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:600px;">编辑套餐类型</div>
+			<div style="max-height: 500px;overflow: auto;width:600px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="100%" cellspacing="10">
+						<tr style="height:30px">
+							<td style="width: 34%;padding-left: 40px;">套餐类型名称：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%;" type="text" ng-model="mificardType.cardType" disabled/>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 34%;padding-left: 40px;">每月最大使用量(M)：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%;" type="text" ng-model="mificardType.editmaxQuota" ng-blur="check.editmaxQuota();" />
+								<div class="alert_note" ng-if="alert.editmaxQuota">
+									{{alertInfo.editmaxQuota}}
+								</div>
+							</td>
+						</tr>
+							<tr style="height:30px">
+							<td style="width: 34%;padding-left: 40px;">每月费用：</td>
+							<td style="width: 80%;">
+								<input style="display: block;width: 90%;" type="text" ng-model="mificardType.editmonthFee" ng-blur="check.editmonthFee();" />
+								<div class="alert_note" ng-if="alert.editmonthFee">
+									{{alertInfo.editmonthFee}}
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:600px;">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

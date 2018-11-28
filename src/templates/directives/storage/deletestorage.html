@@ -1,0 +1,20 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;" ng-init="init();">
+		<div class="jump_show">
+			<div class="jump_show_head">删除货架</div>
+			<div style="max-height: 500px;overflow: auto;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<div style="text-align:center"><span style="margin-bottom: 10px;">确定要删除这条记录吗?</span>
+						<div style="margin-top: 10px;">货架ID：
+							<input type="text" disabled ng-model="dele.id"  />
+						</div>						
+					</div>					
+				</div>
+			</div>
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="ok() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="cancel() ">取消</div>
+		    </div>
+		</div>
+	</div>
+</div>

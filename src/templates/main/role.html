@@ -1,0 +1,30 @@
+<addrole control="add_control" refresh-fn="get_data()"></addrole>
+<editrole editcontroldata="edit_control_data" control="edit_control" refresh-fn="get_data()"></editrole>
+<deleterole control="delete_control" original="delete_data" refresh-fn="get_data()"></deleterole>
+<div style="width:100%;margin:0px auto 20px auto">
+	<div style="margin: 10px 0% 10px 0%;height:34px; ">
+		<div ng-click="addrole() " style="float: right;" class="click_button btn btn-primary">新增角色</div>
+	</div>
+	<table class="tb_y tb_p0 bgc_3 f_12 instance_table " cellpadding="0 " cellspacing="1 " border="0 ">
+		<tr>
+			<td class="bgc_4 " width="5% ">序号</td>
+			<td class="bgc_4 " width="50% ">角色名称</td>
+			<td class="bgc_4 " width="45% ">操作</td>
+		</tr>
+		<tr ng-repeat="item in datas ">
+			<td>{{$index+1}}</td>
+			<td>{{item.roleName}}</td>
+			
+			<td>
+				<div ng-click="editrole(item)" class="table_fun_word ">编辑</div>
+				&nbsp;
+				<div class="table_fun_word" ng-click="deleterole(item)">
+					删除角色
+				</div>
+			</td>
+		</tr>
+		<tr ng-show="datas.length==0 ">
+			<td colspan="4 ">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>

@@ -1,0 +1,7 @@
+<ul class="list-group">
+	<li>
+		<a ui-sref="{{item.sref}}" class="list-group-item {{item.ngclass}}" ng-repeat="item in navigators" ng-click="selectthis(item.name)" ng-cloak>
+			<img src="images/{{item.ngclass}}_{{item.image}}.png" width="20" height="20">&nbsp;&nbsp;{{item.name}}
+		</a>
+	</li>
+</ul>

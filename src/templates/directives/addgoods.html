@@ -1,0 +1,124 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 1000px;" ng-init="init();">
+		<div class="jump_show">
+			<div class="jump_show_head">新增商品</div>
+			<div style="max-height: 500px;overflow: auto;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%">
+						<tr style="height:30px">
+							<td width="10%">商品规格<span ng-show="goods.bizType=='voice'">(元)</span>:</td>
+							<td>
+								<div ng-if="goods.bizType=='voice'">
+									<input type="text" style="width: 100%;" ng-model="goods.spec" ng-blur="check.spec();" placeholder="单位默认：元；范围：1-10万，以逗号分隔，单位不填">
+								</div>
+								<div ng-if="goods.bizType!='voice'">
+									<input type="text" style="width: 100%;" ng-model="goods.spec" ng-blur="check.spec();" placeholder="范围：1-1024G，以逗号分隔">
+								</div>
+								<div class="alert_note" ng-if="alert.spec">
+									{{alertInfo.spec}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">套餐类型:</td>
+							<td width="90%">
+								 <select ng-show="goods.bizType == 'flow'"  style="width:100%;" ng-model="goods.packageType"  ng-disabled="packageTypeDisabled()" ng-blur="check.packageType();">
+									<option value="" disabled selected style="display:none;">选择套餐类型</option>
+									<option value="append">叠加包</option>
+									<option value="month">月包</option>
+									<option value="halfyear">半年包</option>
+									<option value="year">年包</option>
+								</select>
+									<select size="0" ng-show="goods.bizType == 'voice'"  style="width:100%;" ng-model="goods.packageType" ng-blur="check.packageType();">
+									<option value="append" selected="selected">叠加包</option>
+								</select>
+								<div class="alert_note" ng-if="alert.packageType">
+									{{alertInfo.packageType}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">运营商:</td>
+							<td width="90%">
+								<select style="width:100%;" ng-model="goods.mo" ng-blur="check.mo();">
+									<option value="" disabled selected style="display: none;">选择运营商</option>
+									<option value="CMCC">中国移动</option>
+									<option value="ChinaUnicom">中国联通</option>
+									<option value="ChinaNet">中国电信</option>
+								</select>
+								<div class="alert_note" ng-if="alert.mo">
+									{{alertInfo.mo}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">归属地省份:</td>
+							<td width="90%">
+								<div>
+									<span for="chkAll">全选:</span>
+									<input type="checkbox" ng-model="chkall.checked" ng-click="chkAll(chkall.checked)" />
+								</div>
+								<div>
+									<div style="display: inline-block;width: 20%;float: left;" ng-repeat="item in sourceProvincelist">
+										<input type="checkbox" ng-model="item.checked" />{{item.text}}
+									</div>
+									<div style="clear:both"></div>
+								</div>
+								<div class="alert_note" ng-if="alert.sourceProvince">
+									{{alertInfo.sourceProvince}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">归属地地市:</td>
+							<td width="90%">
+								<span ng-if="sourceCityList.length==0">无</span>
+								<div style="margin-top: 20px;" ng-if="sourceCityList.length!=0">
+									<div style="display: inline-block;width: 20%;float: left;" ng-if="sourceCityList.length!=0" ng-repeat="item in sourceCityList">
+										<input type="checkbox" ng-model="item.checked" />{{item.text}}</div>
+								</div>
+							</td>
+						</tr>
+						<tr  ng-hide="get_bizType(goods.bizType)" style="height:30px">
+							<td width="10%" >适用省份:</td>
+							<td width="90%">
+								<input type="radio" name="scopeProvince" ng-model="goods.scopeProvince" value="全国" />全国
+								<input type="radio" name="scopeProvince" ng-model="goods.scopeProvince" value="" />省内
+							</td>
+						</tr>
+						<tr  ng-hide="get_bizType(goods.bizType)" style="height:30px">
+							<td width="10%">适用地市:</td>
+							<td width="90%">
+								<span ng-if="scopeCityList.length==0">无</span>
+								<div style="display: inline-block;width: 20%;float: left;" ng-if="scopeCityList.length!=0" ng-repeat="item in scopeCityList">
+									<input type="checkbox" ng-model="item.checked" />{{item.text}}</div>
+							</td>
+						</tr>
+						<tr ng-hide="get_bizType(goods.bizType)" style="height:30px">
+							<td width="10%">官方价(元):</td>
+							<td width="90%">
+								<input type="text" style="width: 100%;" ng-model="goods.officialPrice" ng-blur="check.officialPrice()">
+								<div class="alert_note" ng-if="alert.officialPrice">
+									{{alertInfo.officialPrice}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">叠加次数:</td>
+							<td width="90%">
+								<input type="text" placeholder="0表示不限制" style="width: 100%;" ng-model="goods.appendCount" ng-blur="check.appendCount()">
+								<div class="alert_note" ng-if="alert.appendCount">
+									{{alertInfo.appendCount}}
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确认</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

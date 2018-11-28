@@ -1,0 +1,19 @@
+<div ng-show="length" style="text-align: center;margin-top: 12px;margin-bottom:12px;">
+	<div onselectstart="return false" class="button_type" ng-click=jump("first")>首页</div>
+	<div onselectstart="return false" class="button_type" ng-click=jump("before")>上一页</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[0]]" ng-click="jump(-4)" ng-if="length>=(middle-4)">{{middle-4}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[1]]" ng-click="jump(-3)" ng-if="length>=(middle-3)">{{middle-3}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[2]]" ng-click="jump(-2)" ng-if="length>=(middle-2)">{{middle-2}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[3]]" ng-click="jump(-1)" ng-if="length>=(middle-1)">{{middle-1}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[4]]" ng-click="jump(0)" ng-if="length>=(middle)">{{middle}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[5]]" ng-click="jump(1)" ng-if="length>=(middle+1)">{{middle+1}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[6]]" ng-click="jump(2)" ng-if="length>=(middle+2)">{{middle+2}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[7]]" ng-click="jump(3)" ng-if="length>=(middle+3)">{{middle+3}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[8]]" ng-click="jump(4)" ng-if="length>=(middle+4)">{{middle+4}}</div>
+	<div onselectstart="return false" ng-class="{true: 'choose', false: 'no_choose'}[choose[9]]" ng-click="jump(5)" ng-if="length>=(middle+5)">{{middle+5}}</div>
+	<div onselectstart="return false" class="button_type" ng-click=jump("next")>下一页</div>
+	<div onselectstart="return false" class="button_type" ng-click=jump("end")>尾页</div>
+	每页<input style="width: 50px;" type="text" ng-model="inputpageSize"/>条
+	<div id="click_botton" style="font-size:14px" ng-click="setpageSize();">OK</div>
+	<div style="display:inline-block">共计{{total}}条记录</div>
+</div>

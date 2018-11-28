@@ -1,0 +1,126 @@
+<div class="background" ng-if="control"></div>
+<div class="background" ng-if="downcontrol">
+	<div class="jump_show_parent" style="width: 500px;">
+		<div class="jump_show">
+			<div class="jump_show_head">下载文件</div>				
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="downtrue() ">确认</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="downcancel() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="background" ng-if="infocontrol">
+	<div class="jump_show_parent" style="width: 300px;">
+		<div class="jump_show">
+			<div class="jump_show_head">信息</div>				
+			<div class="jump_show_foot ">
+				服务器正在处理，请稍后
+			</div>
+		</div>
+	</div>
+</div>
+<div style="width: 800px;height:100%;margin:0 auto;display:table">
+	<div style="display: table-cell;vertical-align:middle">
+
+		<ul id="myTab" class="nav nav-tabs nav-justified">
+			<li class="active">
+				<a ng-click="active(0)" data-toggle="tab">单笔充值</a>
+			</li>
+			<li>
+				<a ng-click="active(1)" data-toggle="tab">批量充值</a>
+			</li>
+		</ul>
+		<div id="myTabContent" class="tab-content" style="border:1px solid #ddd;border-top-color:white;">
+			<div class="tab-pane" ng-class="{true: 'fade in active', false: 'fade'}[isactive]">
+				<div style="max-height: 500px;overflow: auto;">
+					<div style="background: white;padding-top:13px;padding-left:13px;">
+						<table width="95%">
+							<tr style="height:30px">
+								<td width="20%">手机号：</td>
+								<td width="80%">
+									<input class="form-control" type="text" style="width: 100%;" ng-model="recharge.phoneNo" ng-blur="check.phoneNo();">
+									<div class="alert_note" ng-if="alert.phoneNo">
+										{{alertInfo.phoneNo}}
+									</div>
+								</td>
+							</tr>
+							<tr style="height:30px">
+								<td width="20%">适用范围：</td>
+								<td width="80%">
+									<input type="radio" name="scopeProvince" ng-model="recharge.scope" value="全国" />全国
+									<input type="radio" name="scopeProvince" ng-model="recharge.scope" value="省内" />省内
+								</td>
+							</tr>
+							<tr style="height:30px">
+								<td width="20%">规格(单位M/G)：</td>
+								<td width="80%">
+									<input class="form-control" type="text" style="width: 100%;" ng-model="recharge.spec" ng-blur="check.spec();">
+									<div class="alert_note" ng-if="alert.spec">
+										{{alertInfo.spec}}
+									</div>
+								</td>
+							</tr>
+							<tr style="height:30px">
+								<td width="20%">回调地址(可以不填)：</td>
+								<td width="80%">
+									<input class="form-control" type="text" style="width: 100%;margin-top:10px;" ng-model="recharge.callbackUrl" ng-blur="check.callbackUrl();">
+									<div class="alert_note" ng-if="alert.callbackUrl">
+										{{alertInfo.callbackUrl}}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="jump_show_foot ">
+					<div class="click_button btn btn-primary" style="margin: auto; width:40% " ng-click="send() ">提交</div>
+				</div>
+			</div>
+			<div class="tab-pane" ng-class="{false: 'fade in active', true: 'fade'}[isactive]">
+				<div style="max-height: 500px;overflow: auto;">
+					<div style="background: white;padding-top:13px;padding-left:13px;">
+						<table width="95%">
+							<tr style="height:30px">
+								<td width="25%">选择Excel(.xlsx和.xls)文件：</td>
+								<td width="75%">
+									<form id="fileadd" action='/op/recharge/batchRecharge' method='POST' enctype='multipart/form-data'>
+										<input multiple id="file" type="file" style="width: 100%;" name="fileImport" fileread="recharge.file">
+									</form>
+									<div class="alert_note" ng-if="alert.file">
+										{{alertInfo.file}}
+									</div>
+								</td>
+							</tr>
+						</table>
+						<br/>
+						Excel文件样例(<span style="color:red">注：请不要包含表头</span>):
+						<table width="95%" class="tb_y tb_p0  bgc_3 f_12" border="0">
+							<tr style="height: 30px;">
+								<td class="bgc_4">充值号码</td>
+								<td class="bgc_4">适用范围(全国|省内)</td>
+								<td class="bgc_4">规格(单位M)</td>
+								<td class="bgc_4">回调地址(可空)</td>
+							</tr>
+							<tr style="height: 30px;">
+								<td>12302856396</td>
+								<td>全国</td>
+								<td>123M</td>
+								<td></td>
+							</tr>
+							<tr style="height: 30px;">
+								<td>16800974941</td>
+								<td>省内</td>
+								<td>5124M</td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="jump_show_foot ">
+					<div class="click_button btn btn-primary" style="margin: auto; width:40% " ng-click="sendfile()">提交</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

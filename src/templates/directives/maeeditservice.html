@@ -1,0 +1,56 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;"  ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:650px;" ng-if="no">修改上游订单号</div>
+			<div class="jump_show_head" style="width:650px;" ng-if="zt">修改订单状态</div>
+			
+			<div style="max-height: 950px;overflow: auto;width:650px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%" cellspacing="10">
+						<tr style="height:35px;" ng-if = "no">
+							<td style="width: 25%;padding-left: 60px;">渠道订单号：</td>
+							<td style="width: 65%;">
+								<input style="display: block;width: 90%;" id="edit_orderno" ng-model="customer_Service.moOrderNo" ng-blur="checkOrderNo()"/>
+								<div ng-if="alert.orderNo">
+									<a class="alert alert-danger" style="float: left;">长度最多64个字符</a>
+								</div>
+								<div >
+									<a class="alert alert-danger" id="reason" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:35px;" ng-if = "zt">
+							<td style="width: 10%;padding-left:60px ;">订单状态：</td>
+							<td style="width: 70% ;">
+								<select ng-model="alert.state" ng-required="true" style="display: block;width: 90%;" id="check_status" ng-blur="checkStatus()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option value="1">成功</option>
+									<option value="2">失败</option>
+								</select>
+								<div >
+									<a class="alert alert-danger" id="reason1" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:35px;" ng-if = "zt">
+							<td style="width: 20%;padding-left: 60px;">响应码：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 90%;" id="edit_response" ng-model="customer_Service.moResponseCode" ng-blur="checkResponse()"/>
+								<div ng-if="alert.responseCode">
+									<a class="alert alert-danger" style="float: left;">长度最多64个字符</a>
+								</div>
+								<div >
+									<a class="alert alert-danger" id="reason2" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:650px;">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="commit() ">提交</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="close()">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

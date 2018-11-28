@@ -1,0 +1,94 @@
+<addgoods type="name" positioninfo="ProvinceAndCity" control="add_control"  refresh-fn="getPagesAndRecords()"></addgoods>
+<editgoods goodsinit="goods" positioninfo="ProvinceAndCity" control="edit_control" refresh-fn="getPagesAndRecords()"></editgoods>
+
+<div class="filters" >
+	<form class="form-inline">
+		<div>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				<option value="" class="condition-desc" selected>按运营商</option>
+				<option value="">全部运营商</option>
+				<option value="CMCC">中国移动</option>
+				<option value="ChinaUnicom">中国联通</option>
+				<option value="ChinaNet">中国电信</option>
+			</select>
+			<select style="width:150px !important" class="form-control search-bar province" ng-model="sourceProvince">
+				<option value="" class="condition-desc" selected>按省份</option>
+				<option value="">全部归属省份</option>
+				<option ng-repeat="item in ProvinceAndCity">{{item.provinceName}}</option>
+			</select>
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='goodsName' placeholder="商品名称">
+			<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='spec' placeholder="商品规格">
+			<a class="btn btn-primary" role="button" ng-click="searchgoods()">查询</a>
+			<a class="fr btn btn-primary" role="button" ng-click="addgoods()">新增</a>
+		</div>
+	</form>
+</div>
+<div id="orders" class="data_area">
+	<table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+		<tr>
+			<td class="bgc_4" width="4%">商品ID</td>
+			<td class="bgc_4" width="24%">商品名称</td>
+			<td class="bgc_4" width="4%">业务类型</td>
+			<td class="bgc_4" width="4%">商品规格</td>
+			<td class="bgc_4" width="5%">套餐类型</td>
+			<td class="bgc_4" width="6%">运营商</td>
+			<td class="bgc_4" width="10%">归属地省份</td>
+			<td class="bgc_4" width="10%">归属地地市</td>
+			<td class="bgc_4" width="10%">适用地省份</td>
+			<td class="bgc_4" width="10%">适用地地市</td>
+            <td class="bgc_4" width="4%">官方价(元)</td>  
+			<td class="bgc_4" width="4%">叠加次数</td>
+			<td class="bgc_4" width="5%">操作</td>
+		</tr>
+		<tr ng-repeat="item in datas">
+			<td>{{item.id}}</td>
+			<td>{{item.goodsName}}</td>
+			<td>
+				<span ng-if="item.bizType=='flow'"  style="color: red;">流量</span>
+				<span ng-if="item.bizType=='voice'" style="color: green;">语音</span>
+			</td>
+			<td>
+				<span ng-if="item.bizType=='flow'">
+					<div ng-if="!(item.spec%1024)">
+						{{item.spec/1024}}G
+					</div>
+					<div ng-if="item.spec%1024">
+						{{item.spec}}M
+					</div>
+					
+				</span>
+				<span ng-if="item.bizType=='voice'">
+					{{item.spec}}元</td>
+				</span>
+			</td>
+			<td>
+				<span ng-if="item.packageType=='append'">叠加包</span>
+				<span ng-if="item.packageType=='year'">年包</span>
+				<span ng-if="item.packageType=='halfyear'">半年包</span>
+				<span ng-if="item.packageType=='month'">月包</span>
+			</td>
+			<td>
+				<span ng-if="item.mo=='CMCC'">中国移动</span>
+				<span ng-if="item.mo=='ChinaNet'">中国电信</span>
+				<span ng-if="item.mo=='ChinaUnicom'">中国联通</span>
+			</td>
+			<td>{{item.sourceProvince}}</td>
+			<td>{{item.sourceCity}}</td>
+			<td>{{item.scopeProvince}}</td>
+			<td>{{item.scopeCity}}</td>
+			<td  ng-if="item.officialPrice=='ALL'">{{item.officialPrice}}</td>
+			<td  ng-if="item.officialPrice!='ALL'">{{item.officialPrice|number:2}}</td>
+			<td>
+				<span ng-if="item.appendCount==0">不限</span>
+				<span ng-if="item.appendCount!=0">{{item.appendCount}}次</span>
+			</td>
+			<td>
+				<div class="table_fun_word" ng-click="editgoods(item)">编辑</div>
+			</td>
+		</tr>
+		<tr ng-if="datas.length==0">
+			<td colspan="13">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>
+<pagination present='page' total="total" page-size="pageSize" length='totalPage' ></pagination>

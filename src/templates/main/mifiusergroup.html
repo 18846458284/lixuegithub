@@ -1,0 +1,31 @@
+<editgroup editcontroldata="edit_group_control_data" control="edit_group_control" refresh-fn="getPagesAndRecords()"></editgroup>
+<addgroup control="add_group_control" refresh-fn="getPagesAndRecords()"></addgroup>
+
+<div class="filters" style="padding-bottom: 45px">
+		<div>
+			<a class="fr btn btn-primary" role="button" ng-click="addgroup()">新增</a>
+		</div>
+</div>
+<div id="usergroups" class="data_area">
+	<table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+		<tr>
+			<td class="bgc_4" width="3%">组名称</td>
+			<td class="bgc_4" width="4%">状态</td>
+			<td class="bgc_4" width="4%">操作</td>
+		</tr>
+		<tr ng-repeat="item in usergroups">
+			<td>{{item.groupName}}</td>
+			<td>
+				<span ng-if="item.state=='on'">激活</span>
+				<span ng-if="item.state=='off'">未激活</span>
+			</td>
+			<td>
+				<div class="table_fun_word" ng-click="editgroup(item)">编辑</div>
+			</td>
+		</tr>
+		<tr ng-if="usergroups.length==0">
+			<td colspan="3">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>
+<pagination present='page' total="total" page-size="pageSize" length='totalPage' ></pagination>

@@ -1,0 +1,91 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 700px;" ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:650px;">编辑货架</div>
+			<div style="max-height: 500px;overflow: auto;width:650px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%" cellspacing="10">
+						<tr style="height:30px;">
+							<td style="width: 25%;padding-left: 3px;">商品名称：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%;" disabled ng-model="edit.goods.goodsName" />
+							</td>
+						</tr>
+						<tr style="height: 30px;">
+							<td style="width: 25%;padding-left: 3px;">代理商：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%;" disabled ng-model="edit.agentName" />
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">初始等待时长（分钟）：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " type="text" id="storage_initWaitTime" ng-model="edit.initWaitTime" ng-blur="_checkinitWaitTime()" />
+								<div>
+									<a class="alert alert-danger" id="initWaitTime_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">允许到账时长（分钟）：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " id="storage_timeout" ng-model="edit.timeoutMinute" ng-blur="_checktimeoutMinute()" />
+								<div>
+									<a class="alert alert-danger" id="timeout" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">商品折扣（万分比）：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " id="storage_discount" ng-model="edit.discount" ng-blur="_checkdiscount()" />
+								<div>
+									<a class="alert alert-danger" id="good_discount" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">优先原则：</td>
+							<td style="width: 70%;">
+								<select style="display: block;width: 100%; " ng-model="edit.priorityStrategy">
+									<option style="display: none;">请选择优先原则</option>
+									<option value="shard">分流</option>
+									<option value="cost">成本</option>
+								</select>
+								<div>
+									<a class="alert alert-danger" id="priority_strategy" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">状态：</td>
+							<td style="width: 70%;">
+								<select style="width: 100%; " id="storage_state" ng-model="edit.state" ng-blur="_checkstate()">
+									<option class="condition-desc" disabled>选择状态</option>
+									<option value="on">上架</option>
+									<option value="off">下架</option>
+								</select>
+								<div>
+									<a class="alert alert-danger" id="good_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">优先级：</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " type="text" id="storage_priority" placeholder="优先级(-1表示不显示)" ng-model="edit.priority" ng-blur="_checkpriority()" />
+								<div>
+									<a class="alert alert-danger" id="priority_state" style="display: none;float: left;"></a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:650px;">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="commit() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="cancel_edit()">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

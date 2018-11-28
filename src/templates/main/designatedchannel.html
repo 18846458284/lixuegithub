@@ -1,0 +1,89 @@
+<updateagentchannel control="addchanneldata" refresh-fn="get_data()"></updateagentchannel>
+<popup control="popupdata" refresh-fn="get_data()" send-fn="send(data)"></popup>
+<batchdeletechannel control="batchChannel" refresh-fn="get_data()" reset="batchReset();"></batchdeletechannel>
+<div class="filters">
+	<form class="form-inline">
+		<div>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				<option value="" class="condition-desc" selected>按运营商</option>
+				<option value="">全部运营商</option>
+				<option value="CMCC">中国移动</option>
+				<option value="ChinaUnicom">中国联通</option>
+				<option value="ChinaNet">中国电信</option>
+			</select>
+			<select style="width:150px !important" class="form-control search-bar province" ng-model="province">
+				<option value="" class="condition-desc" selected>按省份</option>
+				<option value="">全部省份</option>
+				<option ng-repeat="item in SelectProvince">{{item.provinceName}}</option>
+			</select>
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='channelId' placeholder="渠道ID">
+			<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='channelName' placeholder="渠道名称">
+			</br>
+			<div style="height: 10px;"></div>
+			<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='spec' placeholder="商品规格">
+			<select style="width:150px !important" class="form-control search-bar" ng-model="bizType">
+				<option class="condition-desc" disabled value="">业务类型</option>
+				<option value="">全部业务</option>
+				<option value="flow">流量</option>
+				<option value="voice">语音</option>
+			</select>
+			<a class="btn btn-primary" role="button" ng-click="searchchannel();">查询</a>
+			<a class="fr btn btn-primary" style="margin-left:20px" role="button" ng-click="batchDeleteChannel();">批量删除</a>
+			<a class="fr btn btn-primary" role="button" ng-click="addchannel();">新增</a>
+		</div>
+	</form>
+</div>
+<div id="orders" class="data_area">
+	<table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+		<tr>
+			<td class="bgc_4" width="4%">选择
+				<input type="checkbox" ng-model="selectAll" ng-click="select_all()" />
+			</td>
+			<td class="bgc_4" width="4%">序号</td>
+			<td class="bgc_4" width="5%">渠道ID</td>
+			<td class="bgc_4" width="9%">运营商</td>
+			<td class="bgc_4" width="19%">渠道名称</td>
+			<td class="bgc_4" width="9%">成本(万分比)</td>
+			<td class="bgc_4" width="9%">开通情况</td>
+			<td class="bgc_4" width="9%">适用范围</td>
+			<td class="bgc_4" width="9%">业务类型</td>
+			<td class="bgc_4" width="15%">规格</td>
+			<td class="bgc_4" width="8%">操作</td>
+		</tr>
+		<tr ng-repeat="item in datas">
+			<td>
+				<input type="checkbox" ng-model="batch[$index]" />
+			</td>
+			<td>{{$index+1}}</td>
+			<td>{{item.channelId}}</td>
+			<td>
+				<span ng-if="item.mo=='CMCC'">中国移动</span>
+				<span ng-if="item.mo=='ChinaNet'">中国电信</span>
+				<span ng-if="item.mo=='ChinaUnicom'">中国联通</span>
+			</td>
+			<td>{{item.channelName}}</td>
+			<td>{{item.cost}}</td>
+			<td>
+				<span ng-if="item.state=='on'" style="color:green">开启</span>
+				<span ng-if="item.state=='off'" style="color:red">关闭</span>
+			</td>
+			<td>{{item.scope}}</td>
+			<td>
+				<span style="color:red" ng-if="item.bizType=='flow'">
+					流量
+				</span>
+				<span style="color:green" ng-if="item.bizType=='voice'">
+					语音
+				</span>
+			</td>
+			<td>{{item.spec}}</td>
+			<td>
+				<div class="table_fun_word" ng-click="deletechannel(item);">删除</div>
+			</td>
+		</tr>
+		<tr ng-if="datas.length==0">
+			<td colspan="11">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>
+<pagination present='page' total="total" page-size="pageSize" length='totalPage' ></pagination>

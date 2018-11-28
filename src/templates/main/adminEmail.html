@@ -1,0 +1,23 @@
+<div class="deposite-container">
+	<div class="deposit-cntr" style="margin-top: 0px;">
+		<div class="deposit-row" style="margin-left: 34%;">
+			<div class="deposit-row">
+				<div class="deposit-label" style="margin-left: -90%;"> 时间段范围(分钟)</div>
+				<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="amount"  ng-model="overTime" placeholder="需要查询的时间段范围" style="width: 100%;"  ng-blur="checkOvertime();">
+			</div>
+			<div class="deposit-alert" ng-if="alertOv" style="color:red;">{{alertOvInfo}}</div>
+			<div class="deposit-row">
+				<div class="deposit-label" style="margin-left: -90%;">超时占比(百分比)</div>
+				<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="amount"  ng-model="threshold" placeholder="超时交易量的阀值" style="width: 100%;"  ng-blur="checkThreshold();">
+			</div>
+			<div class="deposit-alert" ng-if="alert" style="color:red;">{{alertInfo}}</div>
+			<div class="deposit-row">
+				<div class="deposit-label" style="margin-left: -90%;">预警邮箱</div>
+				<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="amount"  ng-model="email" placeholder="至多可输入3个邮箱,逗号分隔" style="width: 100%;" ng-blur="checkEmail();">
+			</div>
+			<div class="deposit-alert" ng-if="alertEm" style="color:red;">{{alertEmInfo}}</div>
+			<div class="deposit-row deposit-row-bottom">
+				<input class="btn btn-primary deposit-button" style="float:left;margin-left: -30%;width: 80%;" type="button" ng-click="deposit()" value="确定"></input>
+			</div>
+		</div>
+	</div>

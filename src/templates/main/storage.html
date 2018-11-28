@@ -1,0 +1,111 @@
+<addstorage control="add_show" refresh-fn="getStorage()"></addstorage>
+<editstorage control="edit_show" original="original_data" refresh-fn="getStorage()"></editstorage>
+<deletestorage control="delete_show" original="delete_data" refresh-fn="getStorage()"></deletestorage>
+<batcheditstorage control="batchStorage" refresh-fn="getStorage()" reset="batchReset();"></batcheditstorage>
+<batchdeletestorage control="batchDeleteStorage" refresh-fn="getStorage()" reset="batchReset();"></batchdeletestorage>
+
+<div class="filters" style="padding:5px 0 0px 0;">
+	<form class="form-inline">
+		<div>
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='goodsName' placeholder="商品名称">
+			<input style="width:150px !important" type="text" class="form-control search-bar " ng-model='spec' placeholder="商品规格" />
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='discount' placeholder="折扣(万分比)" />
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				<option class="condition-desc" disabled>按运营商</option>
+				<option value="">全部运营商</option>
+				<option value="CMCC">中国移动</option>
+				<option value="ChinaUnicom">中国联通</option>
+				<option value="ChinaNet">中国电信</option>
+			</select>
+			
+			<br>
+			<div style="margin-top: 10px;">
+				<select style="width:150px !important" class="form-control search-bar" ng-model="state">
+				<option class="condition-desc" disabled>状态</option>
+				<option value="">全部状态</option>
+				<option value="on">上架</option>
+				<option value="off">下架</option>
+			</select>
+				<select style="width:150px !important" class="form-control search-bar" ng-model="appendState">
+					<option class="condition-desc" disabled>叠加限制</option>
+					<option value="">全部叠加限制</option>
+					<option value="on">是</option>
+					<option value="off">否</option>
+				</select>
+				<select style="width:150px !important" class="form-control search-bar province" ng-model="sourceProvince">
+					<option class="condition-desc" disabled>按省份</option>
+					<option value="">全部省份</option>
+					<option ng-repeat="item in SelectProvince">{{item.provinceName}}</option>
+				</select>
+				<select style="width:150px !important" class="form-control search-bar" ng-model="storage_appId">
+					<option class="condition-desc" disabled>按代理商</option>
+					<option value="">全部代理商</option>
+					<option value="ALL">支持ALL</option>
+					<option ng-selected="storage_appId == agent.appId" ng-repeat="agent in agents" value="{{agent.appId}}">{{agent.agentName}}</option>
+				</select>
+				
+				<div class="btn btn-primary" role="button" ng-click="filterStorage()">查询</div>
+				<div class="fr btn btn-primary" style="margin-left:10px;width:8%;text-align: center;" role="button" ng-click="batchEditStorage()">批量修改</div>
+				<div class="fr btn btn-primary" style="margin-left:10px;width:8%;text-align: center;" role="button" ng-click="batchDeleteStorageClick()">批量删除</div>
+				<div class="fr btn btn-primary" role="button" ng-click="addstorage()">新增</div>
+			</div>
+		</div>
+	</form>
+	<div class="data_area" style="margin-top: 5px;">
+		<table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+			<tr>
+				<td class="bgc_4" width="4%">选择
+					<input type="checkbox" ng-model="selectAll" ng-click="select_all()" />
+				</td>
+				<td class="bgc_4 " width="4% ">货架ID</td>
+				<td class="bgc_4" width="4%">商品ID</td>
+				<td class="bgc_4" width="18%">商品名称</td>
+				<td class="bgc_4" width="4%">业务类型</td>
+				<td class="bgc_4 " width="10%">代理商</td>
+				<td class="bgc_4" width="8%">初始等待时长
+					<br/>(单位：分钟)</td>
+				<td class="bgc_4 " width="8%">允许到账时长
+					<br/>(单位：分钟)</td>
+				<td class="bgc_4" width="6%">商品折扣（万分比）</td>
+				<td class="bgc_4 " width="6% ">优先原则</td>
+				<td class="bgc_4 " width="6% ">状态</td>
+				<td class="bgc_4" width="6%">优先级</td>
+				<td class="bgc_4 " width="8%">操作</td>
+			</tr>
+			<tr ng-repeat="item in storage | orderBy: '-id' " title="运营商:{{item.goods.mo}}&#10;归属地省份:{{item.goods.sourceProvince}}&#10;归属地地市:{{item.goods.sourceCity}}&#10;适用省份:{{item.goods.scopeProvince}}&#10;适用地市:{{item.goods.scopeCity}}&#10;套餐类型:{{item.goods.packageType}}&#10;商品规格:{{item.goods.spec}}&#10;商品售价:（单位：厘）{{item.actualPrice}}&#10;叠加限制:{{item.goods.appendCount}}">
+				<td>
+					<input type="checkbox" ng-model="batch[$index]" />
+				</td>
+				<td>{{item.id}}</td>
+				<td>{{item.goodsId}}</td>
+				<td>{{item.goods.goodsName}}</td>
+				<td ng-style="setColor(item)">
+					{{item.goods.bizType}}
+				</td>
+				<td>{{item.agentName}}</td>
+				<td>{{item.initWaitTime}}</td>
+				<td>{{item.timeoutMinute}}</td>
+				<td>{{item.discount}}</td>
+				<td>
+					<span ng-if="item.priorityStrategy=='cost'">成本</span>
+					<span ng-if="item.priorityStrategy=='shard'">分流</span>
+				</td>
+				<td>
+					<span ng-if="item.state=='on'" style="color: green;">上架</span>
+					<span ng-if="item.state=='off'" style="color:red;">下架</span>
+				</td>
+				<td>
+					{{item.priority}}
+				</td>
+				<td>
+					<div class="table_fun_word" ng-click="editstorage(item)">编辑</div>
+					<div class="table_fun_word" ng-click="delete(item)">删除</div>
+				</td>
+			</tr>
+			<tr ng-show="storage.length==0">
+				<td colspan="13">没有匹配的记录</td>
+			</tr>
+		</table>
+	</div>
+	<pagination present='page' total="total" page-size="pageSize" length='totalPage'></pagination>
+</div>

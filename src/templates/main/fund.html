@@ -1,0 +1,59 @@
+<div style="width:100%;margin:0px auto 0px auto">
+	<div>
+		<div class="filters" style="width: 98%;margin: auto;" id="query_condition">
+			<form style="height: 2%;" class="form-inline ng-pristine ng-valid">
+				<span>代理商名称</span>
+				<select class="form-control search-bar" style="height:32px;border-radius:12px;width:20px;" ng-model="appId">
+					<option value="">全部</option>
+					<option ng-selected="agent.appId==appId" ng-repeat="agent in agents" value="{{agent.appId}}">{{agent.agentName}}</option>
+				</select>
+				<span style="margin-left: 50px;">开始日期</span>
+				<input id="fromDate" ng-model='fromDate' class="form-control search-bar laydate-icon ng-pristine ng-valid ng-touched" ng-focus="initDateComponent('fromDate')" ReadOnly="true" />
+				<span style="margin-left: 30px;">结束日期</span>
+				<input id="toDate" ng-model='toDate' class="form-control search-bar laydate-icon ng-pristine ng-valid ng-touched" ng-focus="initDateComponent('toDate')" ReadOnly="true">
+				<a class="btn btn-primary" style="margin-left:40px;width: 80px;" ng-click="filterFund()">查询</a>
+				<a class="fr nav-link" ng-click="exportFunds()">导出订单</a>
+			</form>
+		</div>
+		<div class="data_area">
+			<div id="query_result" style="height: 98%;">
+				<table class="tb_y tb_p0  bgc_3 w_p100 f_12 instance_table " style="width:98%;margin: auto;overflow: auto;" cellpadding="0 " cellspacing="1 " border="0 ">
+					<tr>
+						<td class="bgc_4 " width="15% ">代理商名称</td>
+						<td class="bgc_4 " width="15% ">代理商ID
+							<span ng-class="getupSortClass('appId')" ng-click="makeOrder('appId','up')"></span>
+							<div style="margin: -9px;"></div>
+							<span ng-class="getdownSortClass('appId')" ng-click="makeOrder('appId','down')"></span>
+						</td>
+						<td class="bgc_4 " width="20% ">加款日期
+							<span ng-class="getupSortClass('createDate')" ng-click="makeOrder('createDate','up')"></span>
+							<div style="margin: -9px;"></div>
+							<span ng-class="getdownSortClass('createDate')" ng-click="makeOrder('createDate','down')"></span>
+
+						</td>
+						<td class="bgc_4 " width="15% ">加款金额(元)
+							<span ng-class="getupSortClass('transactionAmount')" ng-click="makeOrder('transactionAmount','up')"></span>
+							<div style="margin: -9px;"></div>
+							<span ng-class="getdownSortClass('transactionAmount')" ng-click="makeOrder('transactionAmount','down')"></span>
+						</td>
+						<td class="bgc_4 " width="20% ">商户订单号</td>
+						<td class="bgc_4 " width="15% ">操作人</td>
+					</tr>
+					<tr ng-repeat="fund in funds">
+						<td>{{fund.agentName}}</td>
+						<td>{{fund.appId}}</td>
+						<td>{{fund.createDate}}</td>
+						<td>{{fund.transactionAmount.toFixed(3)}}</td>
+						<td>{{fund.orderId}}</td>
+						<td>{{fund.operateName}}</td>
+					</tr>
+					<tr ng-show="funds.length==0">
+						<td colspan="6">没有匹配的记录</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+		<pagination present='page' total="total" page-size="num" length='totalPage'></pagination>
+	</div>
+</div>

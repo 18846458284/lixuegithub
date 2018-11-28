@@ -1,0 +1,24 @@
+<!--<ul class="list-group">
+	<li>
+		<a ui-sref="{{item.sref}}" class="list-group-item {{item.ngclass}}" ng-repeat="item in navigators" ng-click="selectthis(item.name)" ng-cloak>
+			<img src="images/{{item.ngclass}}_{{item.image}}.png" width="20" height="20">&nbsp;&nbsp;{{item.name}}
+		</a>
+	</li>
+</ul>-->
+<div ng-init="init()" style="width:99%">
+	<div ng-cotroller="LeftcontentadminController" ng-repeat="item in navigators | orderBy:menueOrder">
+		<a style="cursor:pointer;font-size:16px;" class="list-group-item  active" ng-click="selectthis(item)">
+			{{item.menuName}}</a>
+
+		<div>
+			<ul>
+				<li ng-repeat="subitem in item.menueSon | orderBy:menueOrder|filter:'admin' ">
+					<a style="font-size:14px;" ui-sref="{{subitem.menuUrl}}" class="list-group-item {{subitem.ngclass}} " ng-click="subSelectthis(subitem) " ng-if="item.value">&nbsp;&nbsp;&nbsp;&nbsp;{{subitem.menuName}}</a>
+				</li>
+				<li ng-repeat="subitem in item.menueSon | orderBy:menueOrder|filter:'html' ">
+					<a style="font-size:14px;" href="{{subitem.menuUrl}}" target="_blank" class="list-group-item {{subitem.ngclass}} " ng-click="subSelectthis(subitem) " ng-if="item.value">&nbsp;&nbsp;&nbsp;&nbsp;{{subitem.menuName}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

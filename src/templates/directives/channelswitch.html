@@ -1,0 +1,57 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" ng-init="init();">
+		<div class="jump_show">
+			<div class="jump_show_head">用户来源开关</div>
+			<div style="max-height: 500px;overflow: auto;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="90%">
+						<tr style="height: 30px;">
+							<td width="30%">渠道ID</td>
+							<td>
+								<input style="display: block;width: 100%;" disabled="disabled" ng-model="channelswitchdata.channelId" />
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="30%">开通情况:</td>
+							<td>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="data[0]" value="on" />开
+								</div>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="data[0]" value="off" />关
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="30%">自动开关:</td>
+							<td>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="data[1]" value="on" />开
+								</div>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="data[1]" value="off" />关
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px" ng-if="data[1]=='on'">
+							<td width="30%">自动开启时间</td>
+							<td>
+								<input id="fromDate" ng-model='$parent.$parent.fromDate' placeholder="自动开启时间" class="form-control search-bar laydate-icon" ng-focus="initDateComponent('fromDate')"/>
+							</td>
+						</tr>
+						<tr style="height:30px" ng-if="data[1]=='on'">
+							<td width="30%">自动关闭时间</td>
+							<td width="70%">
+								<input id="toDate" ng-model='$parent.$parent.toDate' placeholder="自动关闭时间" class="form-control search-bar laydate-icon" ng-focus="initDateComponent('toDate')"/>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确认</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

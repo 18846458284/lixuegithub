@@ -1,0 +1,92 @@
+<addmifires control="add_control" refresh-fn="getPagesAndRecords()"></addmifires>
+<editmifires editcontroldata="edit_control_data" control="edit_control" refresh-fn="getPagesAndRecords()"></editmifires>
+<batchedit control="batcheditcontrol" refresh-fn="getPagesAndRecords()" refresh-fn="getPagesAndRecords()" reset="batchReset();"></batchedit>
+<div class="filters">
+	<form class="form-inline">
+		<div>
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='mifiPhoneNo' placeholder="资费卡号或IMSI">
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='mifiNo' placeholder="MIFI编号">
+			<select style="width:150px !important" class="form-control search-bar" ng-model="cardType">
+				<option value=''>全部套餐类型</option>
+				<option ng-selected="cardType == item.cardType" ng-repeat="item in list" value="{{item.cardType}}">{{item.cardType}}</option>
+			</select>
+		</div>
+		<div style="margin-top:10px">
+			<select style="width:150px !important" class="form-control search-bar" ng-model="province">
+				<option value=''>全部省份</option>
+				<option ng-selected="province == item" ng-repeat="item in provinces" value="{{item}}">{{item}}</option>
+			</select>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="activeState">
+				  <option value="" class="condition-desc" selected>状态</option>
+				  <option value="" >全部状态</option>
+				  <option value="on">激活</option>
+				  <option value="off">未激活</option>
+		    </select>
+		    <a class="btn btn-primary" style="margin-left:20px" role="button" ng-click="filterMifiRes()">查询</a>
+		   	<a class="fr btn btn-primary" style="margin-left:20px"  role="button" ng-click="exportMifiRes()">导出数据</a>
+		   	<a class="fr btn btn-primary" style="margin-left:20px" role="button" ng-click="batchEditMifi()">批量修改</a>
+		   	<a class="fr btn btn-primary" style="margin-left:20px"  role="button" ng-click="addMifiRes()">新增</a>
+	    </div>
+	</form>
+</div>
+	<div id="mifiresources" class="data_area" >           
+	   <table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+	     <tr> 
+	     	 <td class="bgc_4" width="4%">选择
+				<input type="checkbox" ng-model="selectAll" ng-click="select_all()" />
+			 </td>
+	         <td  class="bgc_4" width="6%">资费卡号</td>
+	         <td  class="bgc_4" width="6%">IMSI</td>
+	         <td  class="bgc_4" width="6%">用户来源</td>
+	         <td  class="bgc_4" width="5%">省份</td>
+	         <td  class="bgc_4" width="6%">运营商</td>
+	         <td  class="bgc_4" width="6%">套餐剩余流量(当月:M)</td>
+	         <td  class="bgc_4" width="6%">资费卡余额(元)</td>
+	        
+	         <td  class="bgc_4" width="6%">并发数</td>
+	         <td  class="bgc_4" width="6%">套餐类型</td>
+	         <td  class="bgc_4" width="6%">状态</td>
+	         <td  class="bgc_4" width="6%">当月使用时长(分钟)</td>
+	         <td  class="bgc_4" width="6%">当月使用流量(M)</td>
+	         
+	         <td  class="bgc_4" width="6%">操作</td>
+	     </tr>
+	     <tr ng-repeat="item in mifiresources">  
+	     	 <td>
+			 	<input type="checkbox" ng-model="batch[$index]" />
+			 </td>   	
+	     	 <td>{{item.mifiPhoneNo}}</td>
+	         <td>{{item.imsi}}</td>
+	         <td>{{item.groupName}}</td>
+	         <td>{{item.province}}</td>
+	         <td>
+				<span ng-if="item.mo=='中国移动'">中国移动</span>
+				<span ng-if="item.mo=='中国电信'">中国电信</span>
+				<span ng-if="item.mo=='中国联通'">中国联通</span>
+			 </td>
+	         <td>{{item.packageLeft}}</td>
+	         <td>{{item.balance}}</td>
+	        
+	         <td>{{item.concurrency}}</td>
+	         <td>{{item.cardType}}</td>
+	         <td>
+				<span ng-if="item.activeState=='激活'">激活</span>
+				<span ng-if="item.activeState=='未激活'">未激活</span>
+			 </td>
+	         <td>{{item.usedTime}}</td>
+	         <td>{{item.usedQuota}}</td>
+	        
+	         <td>
+	         <div class="table_fun_word" ng-click="editMifi(item)">编辑</div>
+	         </td>
+	     </tr> 
+	     <tr ng-if="mifiresources.length==0">
+	         <td colspan="15">没有匹配的记录</td>
+	     </tr>    
+	   </table>        
+	</div>
+	  
+    <pagination present='page' total="total" page-size="num" length='totalPage' ></pagination>
+    
+     
+ 

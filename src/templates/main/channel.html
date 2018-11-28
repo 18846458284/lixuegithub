@@ -1,0 +1,125 @@
+<addchannel type="name" control="add_control" refresh-fn="getPagesAndRecords()"></addchannel>
+<editchannel editcontroldata="edit_control_data" control="edit_control" refresh-fn="getPagesAndRecords()"></editchannel>
+<channelswitch channelswitchdata="channel_switch_data" control="channel_switch" refresh-fn="getPagesAndRecords()"></channelswitch>
+<batcheditchannel control="batchChannel" refresh-fn="getPagesAndRecords()" reset="batchReset();"></batcheditchannel>
+<div class="filters">
+	<form class="form-inline">
+		<div>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				<option value="" class="condition-desc" selected>按运营商</option>
+				<option value="">全部运营商</option>
+				<option value="CMCC">中国移动</option>
+				<option value="ChinaUnicom">中国联通</option>
+				<option value="ChinaNet">中国电信</option>
+			</select>
+			<select style="width:150px !important" class="form-control search-bar province" ng-model="province">
+				<option value="" class="condition-desc" selected>按省份</option>
+				<option value="">全部省份</option>
+				<option ng-repeat="item in SelectProvince">{{item.provinceName}}</option>
+			</select>
+			
+			<select style="width:150px !important" class="form-control search-bar province" ng-model="state">
+				<option value="" class="condition-desc" selected>按开通情况</option>
+				<option value="">按开通情况</option>
+				<option value="on">开启</option>
+				<option value="off">关闭</option>
+			</select>
+			<select style="width:150px !important" class="form-control search-bar province" ng-model="needSms">
+				<option value="" class="condition-desc" selected>按短信下发</option>
+				<option value="">按短信下发</option>
+				<option value="on">是</option>
+				<option value="off">否</option>
+			</select>
+			</br>
+			<div style="height:10px;"></div>
+			<input style="width:150px !important" type="text" class="form-control search-bar" ng-model='channelId' placeholder="渠道ID" >
+			<input style="width:150px !important" type="text" id="channelName" class="form-control search-bar province" ng-model='channelName' placeholder="渠道名称">
+			<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='spec' placeholder="商品规格">
+			<a class="btn btn-primary" role="button" ng-click="searchchannel()">查询</a>
+			<a class="fr btn btn-primary" style="margin-left:20px" role="button" ng-click="batchEditChannel();">批量修改</a>
+			<a class="fr btn btn-primary" role="button" ng-click="addchannel()">新增</a>
+		</div>
+	</form>
+</div>
+<div id="orders" class="data_area">
+	<table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+		<tr>
+			<td class="bgc_4" width="4%">选择
+				<input type="checkbox" ng-model="selectAll" ng-click="select_all()" />
+			</td>
+			<td class="bgc_4" width="3%">渠道ID</td>
+			<td class="bgc_4" width="4%">渠道商标识</td>
+			<td class="bgc_4" width="4%">运营商</td>
+			<td class="bgc_4" width="14%">渠道名称</td>
+			<td class="bgc_4" width="3%">业务类型</td>
+			<td class="bgc_4" width="4%">成本(万分比)</td>
+			<td class="bgc_4" width="9%">省份</td>
+			<td class="bgc_4" width="7%">地市</td>
+			<td class="bgc_4" width="3%">分流比例</td>
+			<td class="bgc_4" width="3%">开通情况</td>
+			<td class="bgc_4" width="3%">适用范围</td>
+			<td class="bgc_4" width="10%">规格</td>
+			<td class="bgc_4" width="4%">支持冲正</td>
+			<td class="bgc_4" width="4%">自动开关</td>
+			<td class="bgc_4" width="4%">下发短信</td>
+			<td class="bgc_4" width="6%">自动开启时间</td>
+			<td class="bgc_4" width="6%">自动关闭时间</td>
+			<td class="bgc_4" width="7%">操作</td>
+		</tr>
+		<tr ng-repeat="item in datas">
+			<td>
+				<input type="checkbox" ng-model="batch[$index]" />
+			</td>
+			<td>{{item.channelId}}</td>
+			<td>{{item.resourceId}}</td>
+			<td>
+				<span ng-if="item.mo=='CMCC'">中国移动</span>
+				<span ng-if="item.mo=='ChinaNet'">中国电信</span>
+				<span ng-if="item.mo=='ChinaUnicom'">中国联通</span>
+			</td>
+			<td>{{item.channelName}}</td>
+			<td>
+				<span style="color:red" ng-if="item.bizType=='flow'">
+					流量
+				</span>
+				<span style="color:green" ng-if="item.bizType=='voice'">
+					语音
+				</span>
+			</td>
+			<td>{{item.cost}}</td>
+			<td>{{item.province}}</td>
+			<td>{{item.city}}</td>
+			<td>{{item.shardRate}}</td>
+			<td>
+				<span ng-if="item.state=='on'" style="color:green">开启</span>
+				<span ng-if="item.state=='off'" style="color:red">关闭</span>
+			</td>
+			<td>{{item.scope}}</td>
+			<td>
+				{{item.spec | showall}}
+			</td>
+			<td>
+				<span ng-if="item.reverseState=='on'">是</span>
+				<span ng-if="item.reverseState=='off'">否</span>
+			</td>
+			<td>
+				<span ng-if="item.autoState=='on'">开启</span>
+				<span ng-if="item.autoState=='off'">关闭</span>
+			</td>
+			<td>
+				<span ng-if="item.needSms=='on'">是</span>
+				<span ng-if="item.needSms=='off'">否</span>
+			</td>
+			<td>{{item.autoStartTime|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+			<td>{{item.autoCloseTime|date:"yyyy-MM-dd HH:mm:ss"}}</td>
+			<td>
+				<div class="table_fun_word" ng-click="editchannel(item)">编辑</div>
+				<div class="table_fun_word" ng-click="channelswitch(item)">开关</div>
+			</td>
+		</tr>
+		<tr ng-if="datas.length==0">
+			<td colspan="19">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>
+<pagination present='page' total="total" page-size="pageSize" length='totalPage' ></pagination>

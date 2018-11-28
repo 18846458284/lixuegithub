@@ -1,0 +1,66 @@
+<div class="background" ng-if="control.show">
+	<div class="jump_show_parent" style="width: 600px;" ng-init="init()">
+		<div class="jump_show">
+			<div class="jump_show_head" style="width:600px;">批量编辑渠道</div>
+			<div style="max-height: 500px;overflow: auto;width:600px;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%">
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">开通情况:</td>
+							<td style="width: 70%;">
+								<select style="width: 100%; " ng-model="data.state">
+									<option value="">不修改</option>
+									<option class="condition-desc" disabled value="">选择开通状态     不选择就不修改</option>
+									<option value="on">开启</option>
+									<option value="off">关闭</option>
+								</select>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">短信下发:</td>
+							<td style="width: 70%;">
+								<select style="width: 100%; " ng-model="data.needSms">
+									<option value="">不修改</option>
+									<option class="condition-desc" disabled value="">选择是否下发     不选择就不修改</option>
+									<option value="on">是</option>
+									<option value="off">否</option>
+								</select>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">规格:</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " placeholder="不填写就不修改" ng-model="data.spec" ng-blur="check.spec()" />
+								<div ng-if="alert.spec">
+									<a class="alert alert-danger" >{{alertInfo.spec}}</a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">成本(万分比):</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " placeholder="不填写就不修改" ng-model="data.cost" ng-blur="check.cost()" />
+								<div ng-if="alert.cost">
+									<a class="alert alert-danger" >{{alertInfo.cost}}</a>
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td style="width: 25%;padding-left: 3px;">分流比例:</td>
+							<td style="width: 70%;">
+								<input style="display: block;width: 100%; " placeholder="不填写就不修改" ng-model="data.shardRate" ng-blur="check.shardRate()" />
+								<div ng-if="alert.shardRate">
+									<a class="alert alert-danger" >{{alertInfo.shardRate}}</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot " style="width:600px;">
+				<div ng-if="channels.length!=0" class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确定</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,73 @@
+<editqueueservice type ="name" control="edit_service" original="passed_data" refresh-fn="getPagesAndRecords()"></editqueueservice>
+<batcheditqueue control="batchQueue" refresh-fn="getPagesAndRecords()" reset="batchReset();"></batcheditqueue>
+<batchsetfail control="batchFailQueue" refresh-fn="getPagesAndRecords()" reset="batchReset();"></batchsetfail>
+<div class="filters">
+	<form class="form-inline">
+		<div>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				  <option value="" class="condition-desc" selected>按运营商</option>
+				  <option value="" >全部运营商</option>
+				  <option value="CMCC">中国移动</option>
+				  <option value="ChinaUnicom">中国联通</option>
+				  <option value="ChinaNet">中国电信</option>		  
+		    </select>
+		    <select style="width:150px !important" class="form-control search-bar province" ng-model="province">
+				<option value="" class="condition-desc" selected>按省份</option>
+				<option value="">全部省份</option>
+				<option ng-repeat="item in SelectProvince">{{item.provinceName}}</option>
+			</select>
+		   	<a class="btn btn-primary" role="button" ng-click="filterOrderQueue()">查询</a>	
+		   	<a class="fr btn btn-primary" style="margin-left:20px" role="button" ng-click="batchSetFail();">批量释放</a>
+		   	<a class="fr btn btn-primary" style="margin-left:20px" role="button" ng-click="batchEditQueue();">批量修改</a>
+	    </div>
+	</form>
+</div>
+	<div id="maeorders" class="data_area" >           
+	   <table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+	
+		<tr>
+		    <td class="bgc_4" width="4%">选择
+				<input type="checkbox" ng-model="selectAll" ng-click="select_all()" />
+			</td>
+			<td class="bgc_4" width="15%">省份</td>
+			<td class="bgc_4" width="15%">运营商</td>
+			<td class="bgc_4" width="15%">业务类型</td>
+			<td class="bgc_4" width="15%">等待订单数</td>
+			<td class="bgc_4" width="15%">队列长度</td>
+			<td class="bgc_4" width="25%">操作</td>
+		</tr>
+	     <tr ng-repeat="item in maeorders">  
+	     	<td>
+				<input type="checkbox" ng-model="batch[$index]" />
+			</td>   	
+	 		<td>{{item.province}}</td>
+			<td>
+				<span ng-if="item.mo=='CMCC'">中国移动</span>
+				<span ng-if="item.mo=='ChinaNet'">中国电信</span>
+				<span ng-if="item.mo=='ChinaUnicom'">中国联通</span>
+			</td>
+			<td>
+				<span style="color:red" ng-if="item.bizType=='flow'">
+					流量
+				</span>
+				<span style="color:green" ng-if="item.bizType=='voice'">
+					语音
+				</span>
+			</td>
+			<td>{{item.orderQqueueSize}}</td>
+			<td>{{item.queueSize}}</td>
+	        <td>
+	          <div class="table_fun_word" ng-click="service(item,'editqueue')">编辑</div>
+	          <div class="table_fun_word" ng-click="service(item,'waittofail')">释放</div>
+	        </td>
+	     </tr> 
+	     <tr ng-if="maeorders.length==0">
+	         <td colspan="6">没有匹配的记录</td>
+	     </tr>    
+	   </table>        
+	</div>
+	  
+    <pagination present='page' total="total" page-size="num" length='totalPage' ></pagination>
+    
+     
+ 

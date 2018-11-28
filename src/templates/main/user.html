@@ -1,0 +1,30 @@
+<div style="width:100%;margin:0px auto 20px auto">
+	<popup control="popupdata" refresh-fn="get_data()" send-fn="send(data)"></popup>
+	<div style="margin: 10px 0% 10px 0%;height:34px; ">
+		<div ng-click="select('addAdminUser') " style="float: right;" class="click_button btn btn-primary">新增用户</div>
+	</div>
+	<table class="tb_y tb_p0 bgc_3 f_12 instance_table " cellpadding="0 " cellspacing="1 " border="0 ">
+		<tr>
+			<td class="bgc_4 " width="5% ">序号</td>
+			<td class="bgc_4 " width="30% ">用户名称</td>
+			<td class="bgc_4 " width="30% ">角色</td>
+			<td class="bgc_4 " width="35% ">操作</td>
+		</tr>
+		<tr ng-repeat="item in datas ">
+			<td>{{$index+1}}</td>
+			<td>{{item.userName}}</td>
+			<td>{{item.userRole}}</td>
+			
+			<td>
+				<div ng-click="select('edituser',item)" class="table_fun_word ">编辑</div>
+				&nbsp;
+				<div class="table_fun_word" ng-click="select('delete',item)" >
+					删除用户
+				</div>
+			</td>
+		</tr>
+		<tr ng-show="datas.length==0 ">
+			<td colspan="4 ">没有匹配的记录</td>
+		</tr>
+	</table>
+</div>

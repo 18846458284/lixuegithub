@@ -1,0 +1,67 @@
+<editservice type ="name" control="edit_service" original="passed_data" refresh-fn="getPagesAndRecords()"></editservice>
+<div class="filters">
+	<form class="form-inline">
+		<div>
+			<select style="width:150px !important" class="form-control search-bar" ng-model="mo">
+				  <option value="" class="condition-desc" selected>按运营商</option>
+				  <option value="" >全部运营商</option>
+				  <option value="CMCC">中国移动</option>
+				  <option value="ChinaUnicom">中国联通</option>
+				  <option value="ChinaNet">中国电信</option>		  
+		    </select>
+			<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='phoneNo' placeholder="用户手机号">	
+		   	<input style="width:150px !important" type="text" class="form-control search-bar province" ng-model='spec' placeholder="规格(M)">
+			<input style="width:150px !important" id="fromDate"  ng-model='fromDate' placeholder="起始时间" class="form-control search-bar" ng-focus="initDateComponent('fromDate')" ReadOnly="true">
+			<input style="width:150px !important" id="toDate" ng-model='toDate' placeholder="结束时间" class="form-control search-bar" ng-focus="initDateComponent('toDate')" ReadOnly="true">
+		   	<a class="btn btn-primary" role="button" ng-click="filterOrder()">查询</a>	
+	    </div>
+	</form>
+</div>
+
+
+	<div id="maeorders" class="data_area" >           
+	   <table class="tb_y tb_p0  bgc_3 f_12 instance_table" cellpadding="0" cellspacing="1" border="0">
+	     <tr> 
+	     	 <td class="bgc_4" width="5%">运营商</td>
+	         <td  class="bgc_4" width="7%">发放手机号</td>
+	         <td  class="bgc_4" width="5%">适用范围</td>
+	         <td class="bgc_4" width="6%">流量规格(M)</td>
+	         <td class="bgc_4" width="9%">激活码</td>
+	         <td  class="bgc_4" width="12%">充值时间</td>
+	         <td  class="bgc_4" width="12%">请求时间</td>
+	         <td  class="bgc_4" width="6%">渠道商</td>		 
+			 <td  class="bgc_4" width="13%">渠道订单号</td> 
+			 <td class="bgc_4" width="6%">响应码</td>
+			 <td class="bgc_4" width="6%">充值状态</td>
+	         <td class="bgc_4" width="12%">操作</td>
+	     </tr>
+	     <tr ng-repeat="item in maeorders">     	
+	     	 <td><span ng-if="item.mo=='CMCC'">中国移动</span> <span
+					ng-if="item.mo=='ChinaUnicom'">中国联通</span> <span
+					ng-if="item.mo=='ChinaNet'">中国电信</span></td>
+	         <td>{{item.userId}}</td>
+	         <td>{{item.province}}</td>
+	         <td>{{item.activeVolume/1024/1024}}M</td>
+	         <td>{{item.activeCode}}</td>
+	         <td>{{strtime2(item.activeTime)}}</td>
+	         <td>{{strtime2(item.moRequestTime)}}</td>
+	         <td>{{item.channelId}}</td>
+	         <td>{{item.moOrderNo}}</td>
+	         <td>{{item.moResponseCode}}</td>
+	         <td>{{item.state}}</td>
+	         <td>
+	         	<div class="table_fun_word" ng-click="service(item,'floworderno')" ng-if="item.state =='INIT'">渠道订单号</div>
+	         	<span ng-show="item.state =='INIT'">&nbsp;&nbsp;</span>
+	         	<div class="table_fun_word" ng-click="service(item,'flowstatus')" ng-if="item.state =='INIT'">状态</div>
+	         </td>
+	     </tr> 
+	     <tr ng-if="maeorders.length==0">
+	         <td colspan="12">没有匹配的记录</td>
+	     </tr>    
+	   </table>        
+	</div>
+	  
+    <pagination present='page' total="total" page-size="num" length='totalPage' ></pagination>
+    
+     
+ 

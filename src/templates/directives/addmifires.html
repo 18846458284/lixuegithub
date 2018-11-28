@@ -1,0 +1,145 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" style="width: 1000px;" ng-init="init();">
+		<div class="jump_show">
+			<div class="jump_show_head">新增MIFI资源</div>
+			<div style="max-height: 400px;overflow: auto;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="95%">
+						<tr style="height:30px">
+							<td width="10%">资费卡号:</td>
+							<td width="70%">
+								<div>
+									<input type="text" style="width:100%;" ng-model="mifiobj.mifiPhoneNo" ng-blur="check.mifiPhoneNo();" placeholder="不填或非零开头的1-16位数字,多个用逗号隔开">
+								</div>
+								<div class="alert_note" ng-if="alert.mifiPhoneNo">
+									{{alertInfo.mifiPhoneNo}}
+								</div>
+							</td>
+						</tr>
+						<!-- <tr style="height:30px">
+							<td width="10%">MIFI编号:</td>
+							<td width="70%">
+								<div>
+									<input type="text" style="width: 100%;" ng-model="mifiobj.mifiNo" ng-blur="check.mifiNo();">
+								</div>
+								<div class="alert_note" ng-if="alert.mifiNo">
+									{{alertInfo.mifiNo}}
+								</div>
+							</td>
+						</tr> -->
+						<tr style="height:30px;">
+							<td width="10%">IMSI:</td>
+							<td style="width: 70% ;">
+								<div>
+									<input type="text" style="width:100%;" ng-model="mifiobj.imsi" ng-blur="check.imsi();" placeholder="不填或15位数字,多个用逗号隔开">
+								</div>
+								<div class="alert_note" ng-if="alert.imsi">
+									{{alertInfo.imsi}}
+								</div>
+									<div class="alert_note" ng-if="alert.info">
+									{{alertInfo.info}}
+								</div>
+							</td>
+						</tr>
+						
+						<!-- <tr style="height:30px;">
+							<td width="10%">MAC地址:</td>
+							<td style="width: 70% ;">
+								<div>
+									<input type="text" style="width:100%;" ng-model="mifiobj.mifiId" ng-blur="check.mifiId();">
+								</div>
+								<div class="alert_note" ng-if="alert.mifiId">
+									{{alertInfo.mifiId}}
+								</div>
+							</td>
+						</tr> -->
+						
+						<tr style="height:30px;">
+							<td width="10%">省  份:</td>
+							<td width="70%">
+								<select ng-model="mifiobj.province" ng-required="true" style="display: block;width:100%;" id="check_province" ng-blur="check.province()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option ng-selected="province == item" ng-repeat="item in provinces" value="{{item}}">{{item}}</option>
+								</select>
+								<div class="alert_note" ng-if="alert.province">
+									{{alertInfo.province}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="10%">运 营 商:</td>
+							<td width="70%">
+								<select style="width:100%;" ng-model="mifiobj.moType" ng-blur="check.moType();">
+									<option value="" disabled selected style="display: none;">请选择</option>
+									<option value="CMCC">中国移动</option>
+									<option value="ChinaUnicom">中国联通</option>
+									<option value="ChinaNet">中国电信</option>
+								</select>
+								<div class="alert_note" ng-if="alert.moType">
+									{{alertInfo.moType}}
+								</div>
+							</td>
+						</tr>
+					
+						<tr style="height:30px;">
+							<td width="10%">用户来源:</td>
+							<td width="70%">
+								<select ng-model="mifiobj.groupName" ng-required="true" style="display: block;width:100%;" id="check_groupName" ng-blur="check.groupName()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option ng-selected="groupName == item.groupName" ng-repeat="item in groups" value="{{item.groupName}}">{{item.groupName}}</option>
+									<option value="others"/>其他</option>
+								</select>
+								<div class="alert_note" ng-if="alert.groupName">
+									{{alertInfo.groupName}}
+								</div>
+							</td>
+						</tr>
+						<tr style="height:30px;">
+							<td width="10%">套餐类型:</td>
+							<td width="70%">
+								<select ng-model="mifiobj.cardType" ng-required="true" style="display: block;width:100%;" id="check_cardtype" ng-blur="check.cardType()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option ng-selected="cardType == item.cardType" ng-repeat="item in cardTypes" value="{{item.cardType}}">{{item.cardType}}</option>
+								</select>
+								<div class="alert_note" ng-if="alert.cardType">
+									{{alertInfo.cardType}}
+								</div>
+							</td>
+						</tr>
+					
+						<tr style="height:30px;">
+							<td width="10%">状  态:</td>
+							<td style="width: 70% ;">
+								<select ng-model="mifiobj.activeState" ng-required="true" style="display: block;width:100%;" id="check_activeState" ng-blur="check.activeState()">
+									<option value="" disabled="disabled" selected="selected"/>请选择</option>
+									<option value="on">激活</option>
+									<option value="off">未激活</option>
+								</select>
+								<div class="alert_note" ng-if="alert.activeState">
+									{{alertInfo.activeState}}
+								</div>
+							</td>
+						</tr>
+					
+						<tr style="height:30px;">
+							<td width="10%">并发数:</td>
+							<td style="width: 70% ;">
+								<div>
+									<input type="text" style="width:100%;" ng-model="mifiobj.concurrency" ng-blur="check.concurrency();" placeholder = "请输入0-9999的整数,0表示不限制">
+								</div>
+								<div class="alert_note" ng-if="alert.concurrency">
+									{{alertInfo.concurrency}}
+								</div>
+							</td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确认</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="close() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>

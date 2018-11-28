@@ -1,0 +1,29 @@
+<div class="background" ng-if="control"></div>
+<div class="deposite-container">
+	<div class="deposit-cntr">
+		<div class="deposit-row">
+			<div class="deposit-label">代理商</div>
+
+			<select class="agent_dropdown form-control ng-touched deposit-text ng-pristine ng-valid" id="deposit_agent" ng-model="deposit_agent" ng-blur="_checkAgent()">
+				<option value="" disabled selected>请选择代理商</option>
+				<option ng-repeat="agent in agents" value="{{agent.appId}}">{{agent.agentName}}</option>
+			</select>
+		</div>
+		<div class="deposit-alert" id="agent" style="text-align: right;color:red;"></div>
+		<div class="deposit-row">
+			<div class="deposit-label">预存金额</div>
+			<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="amount" ng-blur="_checkrechargeAmount()" ng-model="rechargeAmount" placeholder="单位：/元" />
+		</div>
+		<div class="deposit-alert" id="info" style="text-align: right;color:red;"></div>
+		<div class="deposit-row">
+			<div class="deposit-label">备注</div>
+			<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="deposit_orderid" ng-model="rechargeMessage"  ng-blur="checkMessage()">
+		</div>
+		<div class="deposit-alert" ng-if="alert" ng-model="alertInfo" style="text-align: right;color:red;">{{alertInfo}}
+		</div>
+		<div class="deposit-row deposit-row-bottom">
+			<input class="btn btn-primary deposit-button" type="button" ng-click="deposit()" value="预存"></input>
+		</div>
+		
+	</div>
+</div>

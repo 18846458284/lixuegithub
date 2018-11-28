@@ -1,0 +1,14 @@
+<div class="deposite-container">
+	<div class="deposit-cntr">
+		<div class="deposit-row">
+			<div class="deposit-row">
+				<div class="deposit-label" style="margin-left: -60%;">余额告警阈值</div>
+				<input class="form-control ng-touched deposit-text ng-pristine ng-valid" id="amount" ng-model="threshold" style="width: 90%;float:left;" placeholder="单位：/元" ng-blur="checkThreshold();"></input>
+				<span style="float:left;font-size:14px;margin-top: 7px;margin-left:4px;">元</span>
+			</div>
+			<div class="deposit-alert" ng-if="alert" style="color:red;">{{alertInfo}}</div>
+			<div class="deposit-row deposit-row-bottom">
+				<input class="btn btn-primary deposit-button" style="float:left;" type="button" ng-click="deposit()" value="确定"></input>
+			</div>
+		</div>
+	</div>

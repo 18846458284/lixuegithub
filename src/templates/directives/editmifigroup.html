@@ -1,0 +1,34 @@
+<div class="background" ng-if="control">
+	<div class="jump_show_parent" ng-init="init();">
+		<div class="jump_show">
+			<div class="jump_show_head">编辑用户来源</div>
+			<div style="max-height: 500px;overflow: auto;">
+				<div style="background: white;padding-top:13px;padding-left:13px;">
+					<table width="90%">
+						<tr style="height: 30px;">
+							<td width="30%">名称:</td>
+							<td>
+								<input style="display: block;width: 100%;" disabled="disabled" ng-model="mifiGroup.groupName" />
+							</td>
+						</tr>
+						<tr style="height:30px">
+							<td width="30%">激活情况:</td>
+							<td>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="mifiGroup.state" value="on" />是
+								</div>
+								<div style="display: inline-block;">
+									<input type="radio" ng-model="mifiGroup.state" value="off" />否
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="jump_show_foot ">
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="send() ">确认</div>
+				<div class="click_button btn btn-primary" style="margin: auto; " ng-click="back() ">取消</div>
+			</div>
+		</div>
+	</div>
+</div>
