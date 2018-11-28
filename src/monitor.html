@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=9" />
+		<meta http-equiv="CACHE-CONTROL" content="private" />
+		<meta http-equiv="Content-Encoding" content="gzip" />
+		<title>监控视图</title>
+		<link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/inherit.css" />
+		<link rel="stylesheet" href="css/mae_css.css" />
+		<link rel="stylesheet" href="css/monitor.css" />
+	</head>
+
+	<body ng-app="monitor" ng-controller="MonitorController" sroll="no" style="background-color: #FAFDFF;">
+		<div style="width:100%;margin:auto;text-align: center;">
+			<div style="width:90%;height=100%;margin:auto;text-align: center;">
+				<div style="height:400px;width:35%;float:left;margin-left: 2.5%;margin-top:65px;">
+					<div class="getSale-container">
+						<div style="text-align: center;margin-top:5px;font-size:35px;"><span>今日交易</span></div>
+						<div class="getSale">
+							<div style="text-align: center;margin-top:5px;margin-left:5px;"><span>流量</span></div>
+							<div style="font-size:20px;margin-top:5px;" ng-cloak><span><b>{{monitor_getTodaySale.totalSaleFlow}}元 </b></span></div>
+							<div style="font-size:20px;margin-top:5px;" ng-cloak><span><b>{{monitor_getTodaySale.saleNumFlow}}笔</b></span></div>
+						</div>
+						<div class="getSale">
+							<div style="text-align: center;margin-top:5px;margin-left:5px;"><span>语音</span></div>
+							<div style="font-size:20px;margin-top:5px;" ng-cloak><span><b>{{monitor_getTodaySale.totalSaleVoice}}元</b></span></div>
+							<div style="font-size:20px;margin-top:5px;" ng-cloak><span><b>{{monitor_getTodaySale.saleNumVoice}}笔</b></span></div>
+						</div>
+
+					</div>
+					<div class="getSale-container_rest">
+						<div style="text-align: center;margin-top:2px;"><span><b>昨日交易</b></span></div>
+						<div class="getSale_rest">
+							<div style="text-align: left;margin-top:3px;margin-left:5px;" ng-cloak><span>流量:{{monitor_getSaleAmount.yesterdaySaleFlow}} 元</span></div>
+						</div>
+						<div class="getSale_rest">
+							<div style="text-align: left;margin-top:3px;margin-left:5px;" ng-cloak><span>语音:{{monitor_getSaleAmount.yesterdaySaleVoice}} 元</span></div>
+						</div>
+
+					</div>
+					<div class="getSale-container_rest">
+						<div style="text-align: center;margin-top:2px;"><span><b>当年交易</b></span></div>
+						<div class="getSale_rest">
+							<div style="text-align: left;margin-top:3px;margin-left:5px;" ng-cloak><span>流量:{{monitor_getSaleAmount.yearSaleFlow }} 元</span></div>
+						</div>
+						<div class="getSale_rest">
+							<div style="text-align: left;margin-top:3px;margin-left:5px;" ng-cloak><span>语音:{{monitor_getSaleAmount.yearSaleVoice }} 元</span></div>
+						</div>
+
+					</div>
+				</div>
+				<div style="height:400px;width:23%;float:left;margin-left:5%;margin-top: 65px;">
+					<div class="getSaleTarget-container" ng-cloak>
+						<div class="sale-title-font-size" style="margin-top: 0px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==0">本月销售目标</span></div>
+						<div class="sale-title-font-size" style="margin-top: 0px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==1">上月销售目标</span></div>
+						<div class="sale-font-size" ng-cloak><span>流量:{{monitor_getSaleAmount.monthTargetFlow}}元</span></div>
+						<div class="sale-font-size" ng-cloak><span>语音:{{monitor_getSaleAmount.monthTargetVoice}}元</span></div>
+
+						<div class="sale-title-font-size" style="margin-top: 4px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==0">本月销售累计</span></div>
+						<div class="sale-title-font-size" style="margin-top: 4px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==1">上月销售累计</span></div>
+						<div class="sale-font-size" ng-cloak><span>流量:{{monitor_getSaleAmount. monthSaleFlow}}元</span></div>
+						<div class="sale-font-size" ng-cloak><span>语音:{{monitor_getSaleAmount. monthSaleVoice}}元</span></div>
+
+						<div class="sale-title-font-size" style="margin-top: 4px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==0">本月完成率</span></div>
+						<div class="sale-title-font-size" style="margin-top: 4px;"><span style="margin-left: 1%;" ng-cloak ng-if="monitor_getSaleAmount.firstDayOrNot==1">上月完成率</span></div>
+						<div class="sale-font-size" style="width:100%;height:20px;" ng-cloak>
+							<div style="width:18%;float:left;">流量:</div>
+							<div style="width:70%;float:left;border: 1.8px solid #84C6E4;height: 14px;border-radius:6px;margin-top: 1px;">
+								<div id="completePercentFlow" style="text-align: center;font-size:1px"><span style="font-size:1px" ng-cloak>{{monitor_getSaleAmount.completePercentFlow}}%</span></div>
+							</div>
+						</div>
+						<div class="sale-font-size" style="width:100%;height:20px;" ng-cloak>
+							<div style="width:18%;float:left;">语音:</div>
+							<div style="width:70%;float:left;border: 1.8px solid #84C6E4;height: 14px;border-radius:6px;margin-top: 1px;">
+								<div id="completePercentVoice" style="text-align: center;font-size:1px"><span style="font-size:1px" ng-cloak>{{monitor_getSaleAmount.completePercentVoice}}%</span></div>
+							</div>
+						</div>
+
+						<!--<div class="getSaleTarget-container" style="margin-top:10px;height:130px;">
+
+							<div class="font-size-monitor" style="margin-top:24px;"><span>云市场注册用户：</span></div>
+							<div class="font-size-monitor" style="margin-top:16px;"><span>云市场当日活跃用户：</span></div>
+							<div class="font-size-monitor" style="margin-top:16px;"><span>云市场C端用户交易：</span></div>
+						</div>-->
+					</div>
+				</div>
+				<div class="getTopByAgent_css">
+					<div style="font-size: 20px;text-align: center;height:30px;background-color: #E9F4FD;"ng-if="monitor_getSaleAmount.firstDayOrNot==0">
+						<div margin-left:2%;>本月流量商户TOP5</div>
+					</div>
+					<div style="font-size: 20px;text-align: center;height:30px;background-color: #E9F4FD;"ng-if="monitor_getSaleAmount.firstDayOrNot==1">
+						<div margin-left:2%;>上月流量商户TOP5</div>
+					</div>
+					<div class="getTopByAgent-container_rest_1">
+						<div class="font-size-monitor" ng-cloak><span>No.1:{{monitor_getTopByAgent[0].agentName}}</span></div>
+						<div class="font-size-monitor" ng-cloak><span>占 比:{{monitor_getTopByAgent[0].percent}}%</span></div>
+					</div>
+
+					<div class="getTopByAgent-container_rest_2">
+						<div class="font-size-monitor" ng-cloak><span>No.2:{{monitor_getTopByAgent[1].agentName}}</span></div>
+						<div class="font-size-monitor" ng-cloak><span>占 比:{{monitor_getTopByAgent[1].percent}}%</span></div>
+					</div>
+
+					<div class="getTopByAgent-container_rest_3">
+						<div class="font-size-monitor" ng-cloak><span>No.3:{{monitor_getTopByAgent[2].agentName}}</span></div>
+						<div class="font-size-monitor" ng-cloak><span>占 比:{{monitor_getTopByAgent[2].percent}}%</span></div>
+					</div>
+
+					<div class="getTopByAgent-container_rest_4">
+						<div class="font-size-monitor" ng-cloak><span>No.4:{{monitor_getTopByAgent[3].agentName}}</span></div>
+						<div class="font-size-monitor" ng-cloak><span>占 比:{{monitor_getTopByAgent[3].percent}}%</span></div>
+					</div>
+
+					<div class="getTopByAgent-container_rest_5">
+						<div class="font-size-monitor" ng-cloak><span>No.5:{{monitor_getTopByAgent[4].agentName}}</span></div>
+						<div class="font-size-monitor" ng-cloak><span>占 比:{{monitor_getTopByAgent[4].percent}}%</span></div>
+
+					</div>
+
+				</div>
+				<div style="height:140px;width:95%;float:left;margin-left: 2.5%;">
+					<div class="getTopByProvince-container" ng-cloak>
+						<div style="text-align: left;margin-top:-8px;background-color: #E9F4FD;width:100%">
+							<div style="text-align: center;margin-top:8px;font-size:20px;" ng-if="monitor_getSaleAmount.firstDayOrNot==0"><span>本月流量省份TOP10</span></div>
+
+							<div style="text-align: center;margin-top:8px;font-size:20px;" ng-if="monitor_getSaleAmount.firstDayOrNot==1"><span>上月流量省份TOP10</span></div>
+						</div>
+						<div class="getTopByProvince_1">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.1:{{monitor_getTopByProvince[0].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[0].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[0].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_2">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.2:{{monitor_getTopByProvince[1].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[1].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[1].percent}}%</span></div>
+						</div>
+						<div class="getTopByProvince_3">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.3:{{monitor_getTopByProvince[2].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[2].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[2].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_4">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.4:{{monitor_getTopByProvince[3].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[3].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[3].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_5">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.5:{{monitor_getTopByProvince[4].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[4].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[4].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_6">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.6:{{monitor_getTopByProvince[5].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[5].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[5].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_7">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.7:{{monitor_getTopByProvince[6].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[6].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[6].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_8">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.8:{{monitor_getTopByProvince[7].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[7].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[7].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_9">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.9:{{monitor_getTopByProvince[8].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金 额:{{monitor_getTopByProvince[8].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占 比:{{monitor_getTopByProvince[8].percent}}%</span></div>
+						</div>
+
+						<div class="getTopByProvince_10">
+							<div class="font-size-monitorTop10" ng-cloak><span>No.10:{{monitor_getTopByProvince[9].province}}</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>金&nbsp;&nbsp;&nbsp;额:{{monitor_getTopByProvince[9].transactionAmount}} 元</span></div>
+							<div class="font-size-monitorTop10" ng-cloak><span>占&nbsp;&nbsp;&nbsp;比:{{monitor_getTopByProvince[9].percent}}%</span></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+	</body>
+	<script type="text/javascript" src="js/libs/angular.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular-route.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="js/libs/laydate/laydate.js"></script>
+	<script type="text/javascript" src="js/libs/laypage/laypage.js"></script>
+	<script type="text/javascript" src="js/libs/layer/layer.js"></script>
+	<script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/libs/underscore.js"></script>
+	<script type="text/javascript" src="js/libs/datejs/WdatePicker.js"></script>
+	<script type="text/javascript" src="js/libs/md5.min.js"></script>
+	<script type="text/javascript" src="js/libs/angular-ui-router.min.js"></script>
+	<script type="text/javascript" src="js/libs/jquery.form.min.js"></script>
+	<script type="text/javascript" src="js/libs/zTree/3.5/jquery.ztree.all-3.5.js"></script>
+	<script type="text/javascript" src="js/controllers/main/monitor.js"></script>
+
+</html>
