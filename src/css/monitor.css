@@ -1,0 +1,195 @@
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+
+.getTopByProvince-container {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 122px;
+	width: 100%;
+	float: left;
+}
+
+.getTopByAgent_css {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 340px;
+	width: 27%;
+	float: left;
+	margin-left: 5%;
+	margin-top: 65px;
+}
+
+.sale-font-size {
+	text-align: left;
+	margin-top: 2px;
+	font-size: 5px;
+	margin-left: 4px;
+}
+
+.sale-title-font-size {
+	text-align: left;
+	margin-top: 2px;
+	font-size: 15px;
+	background-color: #E9F4FD;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	width: 100%;
+}
+
+.getTopByAgent-container {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 60px;
+	width: 100%;
+	float: left;
+	margin-left: 20px;
+}
+
+.getTopByAgent-container_rest_1 {
+	height: 55px;
+	width: 100%;
+	float: left;
+	font-size: 30px;
+	margin-bottom: 5px;
+	margin-top: 18px;
+}
+
+.getTopByAgent-container_rest_2,
+.getTopByAgent-container_rest_3,
+.getTopByAgent-container_rest_4 {
+	height: 55px;
+	width: 100%;
+	float: left;
+	margin-bottom: 5px;
+	font-size: 30px;
+}
+
+.getTopByAgent-container_rest_5 {
+	height: 55px;
+	width: 100%;
+	float: left;
+	font-size: 30px;
+}
+
+.getSaleTarget-container {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 200px;
+	width: 100%;
+	float: left;
+}
+
+.getSale {
+	border-radius: 4px;
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 108px;
+	width: 40%;
+	float: left;
+	margin-left: 5%;
+	margin-top: 25px;
+	margin-right: 5%;
+}
+
+.getTopByProvince_1 {
+	border: 1.8px solid #84C6E4;
+	height: 68px;
+	width: 8.92%;
+	float: left;
+	margin-top: 24px;
+	border-left-style: none;
+	border-bottom-style: none;
+	border-top-right-radius: 4px;
+}
+
+.getTopByProvince_2,
+.getTopByProvince_3,
+.getTopByProvince_4,
+.getTopByProvince_5,
+.getTopByProvince_6,
+.getTopByProvince_7,
+.getTopByProvince_8,
+.getTopByProvince_9 {
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 68px;
+	width: 8.92%;
+	float: left;
+	margin-left: 1.2%;
+	margin-top: 24px;
+	border-bottom-style: none;
+}
+
+.getTopByProvince_10 {
+	border-top-left-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 68px;
+	width: 8.92%;
+	float: left;
+	margin-left: 1.2%;
+	margin-top: 24px;
+	border-right-style: none;
+	border-bottom-style: none;
+}
+
+.getSale_rest {
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 32px;
+	width: 40%;
+	float: left;
+	margin-right: 5%;
+	margin-left: 5%;
+	margin-top: 4px;
+	border-bottom-style: none;
+}
+
+.getSale-container {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 200px;
+	width: 100%;
+	float: left;
+}
+
+#completePercentFlow {
+	background: #D8F3F7;
+	display: block;
+	float: left;
+	height: 12px;
+	margin-top: 0px;
+}
+
+#completePercentVoice {
+	background: #D8F3F7;
+	display: block;
+	float: left ;
+	height: 12px;
+	margin-top: 0px;
+}
+
+.getSale-container_rest {
+	border-radius: 4px;
+	border: 1.8px solid #84C6E4;
+	height: 60px;
+	width: 100%;
+	float: left;
+	margin-top: 12px;
+}
+
+.font-size-monitor {
+	text-align: left;
+	font-size: 5px;
+	margin-left: 5px;
+}
+
+.font-size-monitorTop10 {
+	text-align: left;
+	margin-top: 3px;
+	font-size: 1px;
+	margin-left: 5px;
+}
